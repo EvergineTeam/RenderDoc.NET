@@ -3,3 +3,5 @@ RenderDocGen/RenderDocGen/bin
 RenderDocGen/RenderDocGen/obj
 RenderDocGen/WaveEngine.Bindings.RenderDoc/bin
 RenderDocGen/WaveEngine.Bindings.RenderDoc/obj
+RenderDocGen/BasicTest/obj
+RenderDocGen/BasicTest/bin

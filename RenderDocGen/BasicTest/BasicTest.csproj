@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Content\BasicTest\Shaders\GLSL\FragmentShader.glsl" />
+    <None Remove="Content\BasicTest\Shaders\GLSL\VertexShader.glsl" />
+    <None Remove="Content\BasicTest\Shaders\HLSL\HLSL.fx" />
+    <None Remove="Content\BasicTest\Shaders\VK\FragmentShader.spirv" />
+    <None Remove="Content\BasicTest\Shaders\VK\VertexShader.spirv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Content\BasicTest\Shaders\GLSL\FragmentShader.glsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BasicTest\Shaders\GLSL\VertexShader.glsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BasicTest\Shaders\HLSL\HLSL.fx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BasicTest\Shaders\VK\FragmentShader.spirv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BasicTest\Shaders\VK\VertexShader.spirv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WaveEngine.Common" Version="3.0.0.5175-preview3" />
+    <PackageReference Include="WaveEngine.DirectX11" Version="3.0.0.5175-preview3" />
+    <PackageReference Include="WaveEngine.Forms" Version="3.0.0.5175-preview3" />
+    <PackageReference Include="WaveEngine.Mathematics" Version="3.0.0.5175-preview3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WaveEngine.Bindings.RenderDoc\WaveEngine.Bindings.RenderDoc.csproj" />
+  </ItemGroup>
+
+</Project>
