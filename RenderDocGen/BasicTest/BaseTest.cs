@@ -1,14 +1,18 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.Devices;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Windows.Forms;
+using WaveEngine.Bindings.RenderDoc;
 using WaveEngine.Common.Graphics;
 using WaveEngine.DirectX11;
+using WaveEngine.Forms;
 using WaveEngine.Platform;
 
 namespace BasicTest
 {
-    public abstract class BaseTest: IDisposable
+    public abstract class BaseTest : IDisposable
     {
         protected AssetsDirectory assetsDirectory;
         protected WindowsSystem windowSystem;
@@ -70,15 +74,16 @@ namespace BasicTest
             this.fpsTimer = Stopwatch.StartNew();
         }
 
-        public void Draw()
+        public unsafe void Draw()
         {
+            this.surface.KeyboardDispatcher.DispatchEvents();
             this.CalculateFPS();
 
             var gameTime = this.clockTimer.Elapsed;
             this.clockTimer.Restart();
 
             this.InternalDrawCallback(gameTime);
-
+            
             if (this.doPresent)
             {
                 this.swapChain?.Present();

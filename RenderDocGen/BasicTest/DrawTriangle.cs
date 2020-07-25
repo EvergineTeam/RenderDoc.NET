@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using WaveEngine.Bindings.RenderDoc;
 using WaveEngine.Common.Graphics;
 using WaveEngine.Mathematics;
 using Buffer = WaveEngine.Common.Graphics.Buffer;
@@ -8,6 +9,7 @@ namespace BasicTest
 {
     public class DrawTriangle : BaseTest
     {
+        protected RenderDoc renderDoc;
         private Viewport[] viewports;
         private Rectangle[] scissors;
         private CommandQueue commandQueue;
@@ -25,6 +27,8 @@ namespace BasicTest
         public DrawTriangle()
            : base("BasicTest")
         {
+            // Initialize RenderDoc before the graphics context.
+            RenderDoc.Load(out this.renderDoc);
         }
 
         protected override async void InternalLoad()
@@ -79,8 +83,17 @@ namespace BasicTest
             this.vertexBuffers[0] = vertexBuffer;
         }
 
-        protected override void InternalDrawCallback(TimeSpan gameTime)
+        protected unsafe override void InternalDrawCallback(TimeSpan gameTime)
         {
+            var pressed = this.surface.KeyboardDispatcher.ReadKeyState(WaveEngine.Common.Input.Keyboard.Keys.Space) == WaveEngine.Common.Input.ButtonState.Pressing;
+            IntPtr device = (IntPtr)null;
+            IntPtr wndHandle = (IntPtr)null;
+            if (pressed)
+            {
+                device = this.graphicsContext.NativeDevicePointer;
+                this.renderDoc.API.StartFrameCapture(device, (IntPtr)null);
+            }
+
             var commandBuffer = this.commandQueue.CommandBuffer();
 
             commandBuffer.Begin();
@@ -102,6 +115,13 @@ namespace BasicTest
 
             this.commandQueue.Submit();
             this.commandQueue.WaitIdle();
+
+            if (pressed)
+            {
+                var result = this.renderDoc.API.EndFrameCapture(device, (IntPtr)null);
+
+                this.renderDoc.API.LaunchReplayUI(1, null);
+            }
         }
     }
 }
