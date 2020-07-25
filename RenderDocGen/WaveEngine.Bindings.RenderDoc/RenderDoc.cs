@@ -13,7 +13,7 @@ namespace WaveEngine.Bindings.RenderDoc
     public unsafe class RenderDoc
     {
         /// <summary>
-        /// The renderdoc API functions.
+        /// The RenderDoc API functions.
         /// </summary>
         public readonly RENDERDOC_API_1_4_1 API;
 
