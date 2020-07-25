@@ -7,8 +7,14 @@ using System.Net;
 
 namespace WaveEngine.Bindings.RenderDoc
 {
+    /// <summary>
+    /// RenderDoc is a frame-capture based graphics debugger.
+    /// </summary>
     public unsafe class RenderDoc
     {
+        /// <summary>
+        /// The renderdoc API functions.
+        /// </summary>
         public readonly RENDERDOC_API_1_4_1 API;
 
         /// <summary>
