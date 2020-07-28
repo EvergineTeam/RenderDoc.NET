@@ -593,29 +593,14 @@ typedef struct RENDERDOC_API_1_4_1
 
   // Shutdown was renamed to RemoveHooks in 1.4.1.
   // These unions allow old code to continue compiling without changes
-  union
-  {
-    pRENDERDOC_Shutdown Shutdown;
-    pRENDERDOC_RemoveHooks RemoveHooks;
-  };
+  pRENDERDOC_RemoveHooks RemoveHooks;
+  
   pRENDERDOC_UnloadCrashHandler UnloadCrashHandler;
 
   // Get/SetLogFilePathTemplate was renamed to Get/SetCaptureFilePathTemplate in 1.1.2.
   // These unions allow old code to continue compiling without changes
-  union
-  {
-    // deprecated name
-    pRENDERDOC_SetLogFilePathTemplate SetLogFilePathTemplate;
-    // current name
-    pRENDERDOC_SetCaptureFilePathTemplate SetCaptureFilePathTemplate;
-  };
-  union
-  {
-    // deprecated name
-    pRENDERDOC_GetLogFilePathTemplate GetLogFilePathTemplate;
-    // current name
-    pRENDERDOC_GetCaptureFilePathTemplate GetCaptureFilePathTemplate;
-  };
+  pRENDERDOC_SetCaptureFilePathTemplate SetCaptureFilePathTemplate;
+  pRENDERDOC_GetCaptureFilePathTemplate GetCaptureFilePathTemplate;
 
   pRENDERDOC_GetNumCaptures GetNumCaptures;
   pRENDERDOC_GetCapture GetCapture;
@@ -624,13 +609,8 @@ typedef struct RENDERDOC_API_1_4_1
 
   // IsRemoteAccessConnected was renamed to IsTargetControlConnected in 1.1.1.
   // This union allows old code to continue compiling without changes
-  union
-  {
-    // deprecated name
-    pRENDERDOC_IsRemoteAccessConnected IsRemoteAccessConnected;
-    // current name
-    pRENDERDOC_IsTargetControlConnected IsTargetControlConnected;
-  };
+  pRENDERDOC_IsTargetControlConnected IsTargetControlConnected;
+
   pRENDERDOC_LaunchReplayUI LaunchReplayUI;
 
   pRENDERDOC_SetActiveWindow SetActiveWindow;

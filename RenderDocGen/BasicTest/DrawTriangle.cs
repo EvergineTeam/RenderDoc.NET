@@ -120,7 +120,10 @@ namespace BasicTest
             {
                 var result = this.renderDoc.API.EndFrameCapture(device, (IntPtr)null);
 
-                this.renderDoc.API.LaunchReplayUI(1, null);
+                if (result == 1)
+                {
+                    this.renderDoc.API.LaunchReplayUI(1, null);
+                }
             }
         }
     }

@@ -40,10 +40,29 @@ namespace WaveEngine.Bindings.RenderDoc
 		public pRENDERDOC_SetCaptureKeys SetCaptureKeys;
 		public pRENDERDOC_GetOverlayBits GetOverlayBits;
 		public pRENDERDOC_MaskOverlayBits MaskOverlayBits;
+
+		/// <summary>
+		/// Shutdown was renamed to RemoveHooks in 1.4.1.
+		/// These unions allow old code to continue compiling without changes
+		/// </summary>
+		public pRENDERDOC_RemoveHooks RemoveHooks;
 		public pRENDERDOC_UnloadCrashHandler UnloadCrashHandler;
+
+		/// <summary>
+		/// Get/SetLogFilePathTemplate was renamed to Get/SetCaptureFilePathTemplate in 1.1.2.
+		/// These unions allow old code to continue compiling without changes
+		/// </summary>
+		public pRENDERDOC_SetCaptureFilePathTemplate SetCaptureFilePathTemplate;
+		public pRENDERDOC_GetCaptureFilePathTemplate GetCaptureFilePathTemplate;
 		public pRENDERDOC_GetNumCaptures GetNumCaptures;
 		public pRENDERDOC_GetCapture GetCapture;
 		public pRENDERDOC_TriggerCapture TriggerCapture;
+
+		/// <summary>
+		/// IsRemoteAccessConnected was renamed to IsTargetControlConnected in 1.1.1.
+		/// This union allows old code to continue compiling without changes
+		/// </summary>
+		public pRENDERDOC_IsTargetControlConnected IsTargetControlConnected;
 		public pRENDERDOC_LaunchReplayUI LaunchReplayUI;
 		public pRENDERDOC_SetActiveWindow SetActiveWindow;
 		public pRENDERDOC_StartFrameCapture StartFrameCapture;
