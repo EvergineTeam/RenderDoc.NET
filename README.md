@@ -15,3 +15,7 @@ Official documentation: https://renderdoc.org/docs/in_application_api.html
 
 ![alt Capture1](https://github.com/WaveEngine/RenderDoc.NET/blob/master/Capture1.JPG)
 ![alt Capture0](https://github.com/WaveEngine/RenderDoc.NET/blob/master/Capture.JPG)
+
+## Related Work
+
+- [Veldrid RenderDoc Binding](https://github.com/mellinoe/veldrid/tree/c44982e59b0a77a3e01ece926e9993dc72986b0d/src/Veldrid.RenderDoc)
