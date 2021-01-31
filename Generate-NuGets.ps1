@@ -1,8 +1,8 @@
 <#
 .SYNOPSIS
-	Wave Engine bindings NuGet Packages generator script, (c) 2021 Wave Engine
+	Wave Engine NuGet Packages generator script, (c) 2020 Wave Engine
 .DESCRIPTION
-	This script generates NuGet packages for the low-level RenderDoc bindings used in Wave Engine
+	This script generates NuGet packages for the Mixed Reality Toolkit for Wave Engine
 	It's meant to have the same behavior when executed locally as when it's executed in a CI pipeline.
 .EXAMPLE
 	<script> -version 3.4.22.288-local
@@ -11,7 +11,7 @@
 #>
 
 param (
-    [Parameter(mandatory=$true)][string]$version,	
+    [Parameter(mandatory=$true)][string]$version,
 	[string]$outputFolderBase = "nupkgs",
 	[string]$buildVerbosity = "normal",
 	[string]$buildConfiguration = "Release",
