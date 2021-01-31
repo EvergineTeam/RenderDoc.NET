@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic.Devices;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -115,7 +114,7 @@ namespace BasicTest
             this.fpsCounter++;
             if (this.fpsTimer.ElapsedMilliseconds > 1000)
             {
-                var fpsString = string.Format("FPS: {0:F2} ({1:F2}ms)", 1000.0 * this.fpsCounter / this.fpsTimer.ElapsedMilliseconds, (float)this.fpsTimer.ElapsedMilliseconds / this.fpsCounter);
+                var fpsString = string.Format("FPS: {0:F2} ({1:F2}ms) - Press space key", 1000.0 * this.fpsCounter / this.fpsTimer.ElapsedMilliseconds, (float)this.fpsTimer.ElapsedMilliseconds / this.fpsCounter);
                 this.FPSUpdateCallback?.Invoke(fpsString);
 
                 this.fpsTimer.Restart();

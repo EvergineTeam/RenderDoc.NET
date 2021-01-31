@@ -85,6 +85,7 @@ namespace BasicTest
 
         protected unsafe override void InternalDrawCallback(TimeSpan gameTime)
         {
+            // Press space key
             var pressed = this.surface.KeyboardDispatcher.ReadKeyState(WaveEngine.Common.Input.Keyboard.Keys.Space) == WaveEngine.Common.Input.ButtonState.Pressing;
             IntPtr device = (IntPtr)null;
             IntPtr wndHandle = (IntPtr)null;
