@@ -27,11 +27,6 @@ steps:
     versionSpec: '$(NuGetVersion)'
     checkLatest: true
 
-- task: NuGetCommand@2
-  inputs:
-    command: 'custom'
-    arguments: 'sources add -Name "WaveNightlyFeed" -Source "https://waveengineteam.pkgs.visualstudio.com/_packaging/WaveEngine-nightly/nuget/v3/index.json" -Username "vsts" -Password "$(WaveNightlyToken)" -StorePasswordInClearText -ConfigFile $(nugetConfigPath)'
-
 - task: PowerShell@2
   displayName: 'Generate NuGet packages'
   inputs:
