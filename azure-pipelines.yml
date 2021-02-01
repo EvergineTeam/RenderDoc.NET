@@ -46,4 +46,4 @@ steps:
     command: 'push'
     packagesToPush: '$(nugetOutputPath)/**/*.nupkg;!$(nugetOutputPath)/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
-    publishFeedCredentials: 'PlainConcepts.WaveEngine'
+    publishFeedCredentials: 'WaveEngine Nuget.org'
