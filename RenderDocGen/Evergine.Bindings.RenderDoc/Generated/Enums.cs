@@ -48,14 +48,24 @@ namespace Evergine.Bindings.RenderDoc
 		eRENDERDOC_Option_CaptureCallstacks = 3,
 
 		/// <summary>
-		/// When capturing CPU callstacks, only capture them from drawcalls.
+		/// When capturing CPU callstacks, only capture them from actions.
 		/// This option does nothing without the above option being enabled
 		/// Default - disabled
-		/// 1 - Only captures callstacks for drawcall type API events.
+		/// 1 - Only captures callstacks for actions.
 		/// Ignored if CaptureCallstacks is disabled
 		/// 0 - Callstacks, if enabled, are captured for every event.
 		/// </summary>
 		eRENDERDOC_Option_CaptureCallstacksOnlyDraws = 4,
+
+		/// <summary>
+		/// When capturing CPU callstacks, only capture them from actions.
+		/// This option does nothing without the above option being enabled
+		/// Default - disabled
+		/// 1 - Only captures callstacks for actions.
+		/// Ignored if CaptureCallstacks is disabled
+		/// 0 - Callstacks, if enabled, are captured for every event.
+		/// </summary>
+		eRENDERDOC_Option_CaptureCallstacksOnlyActions = 4,
 
 		/// <summary>
 		/// Specify a delay in seconds to wait for a debugger to attach, after
@@ -607,6 +617,11 @@ namespace Evergine.Bindings.RenderDoc
 		/// RENDERDOC_API_1_4_1 = 1 04 01
 		/// </summary>
 		eRENDERDOC_API_Version_1_4_1 = 10401,
+
+		/// <summary>
+		/// RENDERDOC_API_1_4_2 = 1 04 02
+		/// </summary>
+		eRENDERDOC_API_Version_1_4_2 = 10402,
 	}
 
 }

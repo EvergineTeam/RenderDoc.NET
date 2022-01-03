@@ -27,6 +27,7 @@ namespace Evergine.Bindings.RenderDoc
 	/// 1.4.0 - Added feature: DiscardFrameCapture() to discard a frame capture in progress and stop
 	/// capturing without saving anything to disk.
 	/// 1.4.1 - Refactor: Renamed Shutdown to RemoveHooks to better clarify what is happening
+	/// 1.4.2 - Refactor: Renamed 'draws' to 'actions' in callstack capture option.
 	/// </summary>
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct RENDERDOC_API_1_4_1
