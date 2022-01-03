@@ -37,7 +37,7 @@ namespace RenderDocGen
             using (StreamWriter file = File.CreateText(Path.Combine(outputPath, "Enums.cs")))
             {
                 file.WriteLine("using System;\n");
-                file.WriteLine("namespace WaveEngine.Bindings.RenderDoc");
+                file.WriteLine("namespace Evergine.Bindings.RenderDoc");
                 file.WriteLine("{");
 
                 foreach (var cppEnum in compilation.Enums)
@@ -77,7 +77,7 @@ namespace RenderDocGen
             using (StreamWriter file = File.CreateText(Path.Combine(outputPath, "Delegates.cs")))
             {
                 file.WriteLine("using System;\n");
-                file.WriteLine("namespace WaveEngine.Bindings.RenderDoc");
+                file.WriteLine("namespace Evergine.Bindings.RenderDoc");
                 file.WriteLine("{");
 
                 foreach (var funcPointer in delegates)
@@ -118,7 +118,7 @@ namespace RenderDocGen
             {
                 file.WriteLine("using System;");
                 file.WriteLine("using System.Runtime.InteropServices;\n");
-                file.WriteLine("namespace WaveEngine.Bindings.RenderDoc");
+                file.WriteLine("namespace Evergine.Bindings.RenderDoc");
                 file.WriteLine("{");
 
                 var structs = compilation.Classes.Where(c => c.ClassKind == CppClassKind.Struct && c.IsDefinition == true);

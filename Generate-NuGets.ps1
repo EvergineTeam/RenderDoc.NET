@@ -1,13 +1,13 @@
 <#
 .SYNOPSIS
-	Wave Engine NuGet Packages generator script, (c) 2020 Wave Engine
+	Evergine NuGet Packages generator script, (c) 2022 Evergine Team
 .DESCRIPTION
-	This script generates NuGet packages for the Mixed Reality Toolkit for Wave Engine
+	This script generates NuGet packages for the Mixed Reality Toolkit for Evergine
 	It's meant to have the same behavior when executed locally as when it's executed in a CI pipeline.
 .EXAMPLE
 	<script> -version 3.4.22.288-local
 .LINK
-	https://waveengine.net
+	https://evergine.com/
 #>
 
 param (
@@ -15,7 +15,7 @@ param (
 	[string]$outputFolderBase = "nupkgs",
 	[string]$buildVerbosity = "normal",
 	[string]$buildConfiguration = "Release",
-	[string]$bindingsCsprojPath = "RenderDocGen\WaveEngine.Bindings.RenderDoc\WaveEngine.Bindings.RenderDoc.csproj"
+	[string]$bindingsCsprojPath = "RenderDocGen\Evergine.Bindings.RenderDoc\Evergine.Bindings.RenderDoc.csproj"
 )
 
 # Utility functions

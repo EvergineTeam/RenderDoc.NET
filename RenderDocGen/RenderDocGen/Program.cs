@@ -31,7 +31,7 @@ namespace RenderDocGen
             }
             else
             {
-                string outputPath = "..\\..\\..\\..\\WaveEngine.Bindings.RenderDoc\\Generated";
+                string outputPath = "..\\..\\..\\..\\Evergine.Bindings.RenderDoc\\Generated";
                 CsCodeGenerator.Instance.Generate(compilation, outputPath);
             }
         }

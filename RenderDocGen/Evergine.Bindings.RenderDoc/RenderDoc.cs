@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Net;
 
-namespace WaveEngine.Bindings.RenderDoc
+namespace Evergine.Bindings.RenderDoc
 {
     /// <summary>
     /// RenderDoc is a frame-capture based graphics debugger.

@@ -1,6 +1,6 @@
 using System;
 
-namespace WaveEngine.Bindings.RenderDoc
+namespace Evergine.Bindings.RenderDoc
 {
 	/// <summary>
 	/// Sets an option that controls how RenderDoc behaves on capture.

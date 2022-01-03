@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace WaveEngine.Bindings.RenderDoc
+namespace Evergine.Bindings.RenderDoc
 {
 	/// <summary>
 	/// API version changelog:

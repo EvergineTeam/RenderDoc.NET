@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace WaveEngine.Bindings.RenderDoc
+namespace Evergine.Bindings.RenderDoc
 {
     public abstract class NativeLibrary
     {
