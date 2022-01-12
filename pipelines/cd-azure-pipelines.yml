@@ -1,7 +1,6 @@
 name: $(Date:yyyy)$(Date:.M)$(Date:.d)$(Rev:.r)
 
-trigger:
-  - master
+trigger: none
 pr: none
 
 stages:
