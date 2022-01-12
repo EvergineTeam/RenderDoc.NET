@@ -5,7 +5,7 @@ pr: none
 
 stages:
   - stage: NugetBuild
-    displayName: "Build Studio and Nugets"
+    displayName: "Build Nugets"
     jobs:
       - template: "templates/build-nugets.yml"
         parameters:
