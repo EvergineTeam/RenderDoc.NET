@@ -4,12 +4,12 @@ trigger:
   batch: true
   branches:
     include:
-      - develop
+      - master
 pr:
   autoCancel: true
   branches:
     include:
-      - develop
+      - master
 
 stages:
   - stage: NugetBuild
