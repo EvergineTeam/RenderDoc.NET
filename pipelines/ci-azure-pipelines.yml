@@ -1,0 +1,23 @@
+name: $(Date:yyyy)$(Date:.M)$(Date:.d)$(Rev:.r)-rolling
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - develop
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - develop
+
+stages:
+  - stage: NugetBuild
+    displayName: "Build Studio and Nugets"
+    jobs:
+      - template: "templates/build-nugets.yml"
+        parameters:
+          buildConfiguration: Release
+          buildVersion: "$(Build.BuildNumber)"
+          publishEnabled: false
+          publishFeed: ""
