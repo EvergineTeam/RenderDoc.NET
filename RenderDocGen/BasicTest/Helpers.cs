@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using WaveEngine.Common.Graphics;
-using WaveEngine.Common.IO;
+using Evergine.Common.Graphics;
+using Evergine.Common.IO;
 
 namespace BasicTest
 {

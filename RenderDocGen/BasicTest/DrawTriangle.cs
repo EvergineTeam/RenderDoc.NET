@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using Evergine.Bindings.RenderDoc;
-using WaveEngine.Common.Graphics;
-using WaveEngine.Mathematics;
-using Buffer = WaveEngine.Common.Graphics.Buffer;
+using Evergine.Common.Graphics;
+using Evergine.Mathematics;
+using Buffer = Evergine.Common.Graphics.Buffer;
 
 namespace BasicTest
 {
@@ -86,7 +86,7 @@ namespace BasicTest
         protected unsafe override void InternalDrawCallback(TimeSpan gameTime)
         {
             // Press space key
-            var pressed = this.surface.KeyboardDispatcher.ReadKeyState(WaveEngine.Common.Input.Keyboard.Keys.Space) == WaveEngine.Common.Input.ButtonState.Pressing;
+            var pressed = this.surface.KeyboardDispatcher.ReadKeyState(Evergine.Common.Input.Keyboard.Keys.Space) == Evergine.Common.Input.ButtonState.Pressing;
             IntPtr device = (IntPtr)null;
             IntPtr wndHandle = (IntPtr)null;
             if (pressed)

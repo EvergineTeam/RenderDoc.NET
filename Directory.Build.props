@@ -2,13 +2,13 @@
 	xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 	<PropertyGroup>
-		<Copyright>Copyright (c) Wave Engine 2020</Copyright>
-		<Authors>Wave Engine Team</Authors>
+		<Copyright>Copyright (c) Evergine 2022</Copyright>
+		<Authors>Evergine</Authors>
 		<Company>Plain Concepts</Company>
-    <PackageIconUrl>http://wave.blob.core.windows.net/$root/NugetWave.png</PackageIconUrl>
-    <Description>Low-level bindings for RenderDoc used in WaveEngine</Description>
-		<RepositoryUrl>https://github.com/WaveEngine/RenderDoc.NET</RepositoryUrl>
-		<PackageTags>RenderDoc;WaveEngine;C#;Game Engine;DirectX;OpenGL;OpenGLES;Vulkan;Metal;2D;3D;AR;VR;MixedReality;Mobile;HoloLens</PackageTags>
+		<PackageIcon>icon.png</PackageIcon>
+		<Description>Low-level bindings for RenderDoc used in Evergine</Description>
+		<RepositoryUrl>https://github.com/EvergineTeam/RenderDoc.NET</RepositoryUrl>
+		<PackageTags>RenderDoc;Evergine;C#;Game Engine;DirectX;OpenGL;OpenGLES;Vulkan;Metal;2D;3D;AR;VR;MixedReality;Mobile;HoloLens</PackageTags>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 	</PropertyGroup>
 

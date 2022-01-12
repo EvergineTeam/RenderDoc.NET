@@ -4,10 +4,10 @@ using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
 using Evergine.Bindings.RenderDoc;
-using WaveEngine.Common.Graphics;
-using WaveEngine.DirectX11;
-using WaveEngine.Forms;
-using WaveEngine.Platform;
+using Evergine.Common.Graphics;
+using Evergine.DirectX11;
+using Evergine.Forms;
+using Evergine.Platform;
 
 namespace BasicTest
 {
@@ -44,7 +44,7 @@ namespace BasicTest
         public void Initialize()
         {
             this.assetsDirectory = new AssetsDirectory(this.assetsRootPath);
-            this.windowSystem = new WaveEngine.Forms.FormsWindowsSystem();
+            this.windowSystem = new Evergine.Forms.FormsWindowsSystem();
         }
 
         public GraphicsContext CreateGraphicsContext(SwapChainDescription swapChainDescriptor)
@@ -82,7 +82,7 @@ namespace BasicTest
             this.clockTimer.Restart();
 
             this.InternalDrawCallback(gameTime);
-            
+
             if (this.doPresent)
             {
                 this.swapChain?.Present();
