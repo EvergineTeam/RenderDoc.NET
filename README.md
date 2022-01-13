@@ -1,5 +1,5 @@
 # RenderDoc.NET
-This repository contains low-level bindings for RenderDoc used in Evergine for .NET Core and .NET 5.0.
+This repository contains low-level bindings for RenderDoc used in Evergine for .NET Core and .NET 6.0.
 This binding is auto-generated from renderdoc api header: https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h
 
 Official documentation: https://renderdoc.org/docs/in_application_api.html
