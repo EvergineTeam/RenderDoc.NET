@@ -8,7 +8,7 @@ namespace Evergine.Bindings.RenderDoc
     internal static class Libdl
     {
         [DllImport("libdl")]
-        public static extern IntPtr dlopen(string fileName);
+        public static extern IntPtr dlopen(string fileName, int flags);
 
         [DllImport("libdl")]
         public static extern IntPtr dlsym(IntPtr module, string procName);
