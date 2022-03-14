@@ -53,8 +53,9 @@ namespace Evergine.Bindings.RenderDoc
             {
                 return new WindowsNativeLibrary(libraryName);
             }
-            else if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux)){
-                return new LinuxNativeLibrary(libraryName);
+            else if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                return new UnixNativeLibrary(libraryName);
             }
             else
             {
@@ -84,14 +85,15 @@ namespace Evergine.Bindings.RenderDoc
                 return Kernel32.GetProcAddress(NativeHandle, functionName);
             }
         }
-        private class LinuxNativeLibrary : NativeLibrary
+
+        private class UnixNativeLibrary : NativeLibrary
         {
-            public LinuxNativeLibrary(string libraryName) : base(libraryName)
+            public UnixNativeLibrary(string libraryName) : base(libraryName)
             {
             }
             
             protected override IntPtr LoadLibrary(string libraryName){
-                return Libdl.dlopen(libraryName, 0x002);
+                return Libdl.dlopen(libraryName, Libdl.RTLD_NOW);
             }
             
             protected override void FreeLibrary(IntPtr libraryHandle){

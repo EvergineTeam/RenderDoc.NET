@@ -7,6 +7,8 @@ namespace Evergine.Bindings.RenderDoc
 {
     internal static class Libdl
     {
+        public const int RTLD_NOW = 0x002;
+
         [DllImport("libdl")]
         public static extern IntPtr dlopen(string fileName, int flags);
 
