@@ -92,11 +92,13 @@ namespace Evergine.Bindings.RenderDoc
             {
             }
             
-            protected override IntPtr LoadLibrary(string libraryName){
+            protected override IntPtr LoadLibrary(string libraryName)
+            {
                 return Libdl.dlopen(libraryName, Libdl.RTLD_NOW);
             }
             
-            protected override void FreeLibrary(IntPtr libraryHandle){
+            protected override void FreeLibrary(IntPtr libraryHandle)
+            {
                 Libdl.dlclose(libraryHandle);
             }
             
