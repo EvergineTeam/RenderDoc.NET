@@ -76,7 +76,8 @@ namespace RenderDocGen
 
             using (StreamWriter file = File.CreateText(Path.Combine(outputPath, "Delegates.cs")))
             {
-                file.WriteLine("using System;\n");
+                file.WriteLine("using System;");
+                file.WriteLine("using System.Runtime.InteropServices;\n");
                 file.WriteLine("namespace Evergine.Bindings.RenderDoc");
                 file.WriteLine("{");
 
@@ -86,6 +87,7 @@ namespace RenderDocGen
                     CppFunctionType pointerType = ((CppPointerType)funcPointer.ElementType).ElementType as CppFunctionType;
 
                     var returnType = Helpers.ConvertToCSharpType(pointerType.ReturnType);
+                    returnType = Helpers.ShowAsMarshalType(returnType, Helpers.Family.ret);
                     file.Write($"\tpublic unsafe delegate {returnType} {funcPointer.Name}(");
 
                     if (pointerType.Parameters.Count > 0)
@@ -99,6 +101,7 @@ namespace RenderDocGen
 
                             var parameter = pointerType.Parameters[i];
                             var convertedType = Helpers.ConvertToCSharpType(parameter.Type);
+                            convertedType = Helpers.ShowAsMarshalType(convertedType, Helpers.Family.param);
                             file.Write($"\t\t {convertedType} {parameter.Name}");
                         }
                     }
@@ -133,6 +136,7 @@ namespace RenderDocGen
                     {
                         Helpers.PrintComments(file, member.Comment, "\t\t", true);
                         string type = Helpers.ConvertToCSharpType(member.Type);
+                        type = Helpers.ShowAsMarshalType(type, Helpers.Family.field);
                         file.WriteLine($"\t\tpublic {type} {member.Name};");
                     }
 

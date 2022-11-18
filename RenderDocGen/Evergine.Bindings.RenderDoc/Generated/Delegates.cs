@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 
 namespace Evergine.Bindings.RenderDoc
 {
@@ -91,12 +92,12 @@ namespace Evergine.Bindings.RenderDoc
 	/// Capture #2 -> my_captures/example_frame456.rdc
 	/// </summary>
 	public unsafe delegate void pRENDERDOC_SetCaptureFilePathTemplate(
-		 char* pathtemplate);
+		 [MarshalAs(UnmanagedType.LPStr)] string pathtemplate);
 
 	/// <summary>
 	/// returns the current capture path template, see SetCaptureFileTemplate above, as a UTF-8 string
 	/// </summary>
-	public unsafe delegate char* pRENDERDOC_GetCaptureFilePathTemplate();
+	public unsafe delegate string pRENDERDOC_GetCaptureFilePathTemplate();
 
 	/// <summary>
 	/// returns the number of captures that have been made
@@ -117,7 +118,7 @@ namespace Evergine.Bindings.RenderDoc
 	/// </summary>
 	public unsafe delegate uint pRENDERDOC_GetCapture(
 		 uint idx,
-		 char* filename,
+		 [MarshalAs(UnmanagedType.LPStr)] string filename,
 		 uint* pathlength,
 		 ulong* timestamp);
 
@@ -130,8 +131,8 @@ namespace Evergine.Bindings.RenderDoc
 	/// Any existing comments will be overwritten.
 	/// </summary>
 	public unsafe delegate void pRENDERDOC_SetCaptureFileComments(
-		 char* filePath,
-		 char* comments);
+		 [MarshalAs(UnmanagedType.LPStr)] string filePath,
+		 [MarshalAs(UnmanagedType.LPStr)] string comments);
 
 	/// <summary>
 	/// returns 1 if the RenderDoc UI is connected to this application, 0 otherwise
@@ -149,7 +150,7 @@ namespace Evergine.Bindings.RenderDoc
 	/// </summary>
 	public unsafe delegate uint pRENDERDOC_LaunchReplayUI(
 		 uint connectTargetControl,
-		 char* cmdline);
+		 [MarshalAs(UnmanagedType.LPStr)] string cmdline);
 
 	/// <summary>
 	/// RenderDoc can return a higher version than requested if it's backwards compatible,

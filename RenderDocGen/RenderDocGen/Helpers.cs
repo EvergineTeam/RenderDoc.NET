@@ -149,6 +149,55 @@ namespace RenderDocGen
             return result;
         }
 
+        public enum Family
+        {
+            param,
+            field,
+            ret,
+        }
+
+        public static string ShowAsMarshalType(string type, Family family)
+        {
+            switch (type)
+            {
+                case "bool":
+                    switch (family)
+                    {
+                        case Family.param:
+                            return "[MarshalAs(UnmanagedType.Bool)] bool";
+                        case Family.ret:
+                            return "bool";
+                        case Family.field:
+                        default:
+                            return "byte";
+                    }
+                case "bool*":
+                    switch (family)
+                    {
+                        case Family.ret:
+                            return "bool";
+                        case Family.param:
+                        case Family.field:
+                        default:
+                            return "byte*";
+                    }
+                case "char*":
+                case "unsigned char*":
+                    switch (family)
+                    {
+                        case Family.param:
+                            return "[MarshalAs(UnmanagedType.LPStr)] string";
+                        case Family.ret:
+                            return "string";
+                        case Family.field:
+                        default:
+                            return "byte*";
+                    }
+                default:
+                    return type;
+            }
+        }
+
         private static string GetCsTypeName(CppPointerType pointerType)
         {
             if (pointerType.ElementType is CppQualifiedType qualifiedType)
