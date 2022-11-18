@@ -4,7 +4,7 @@ This binding is auto-generated from renderdoc api header: https://github.com/bal
 
 Official documentation: https://renderdoc.org/docs/in_application_api.html
 
-[![Build Status](https://waveengineteam.visualstudio.com/Evergine/_apis/build/status/Bindings/RenderDoc.NET/RenderDoc.NET%20CI?branchName=master)](https://waveengineteam.visualstudio.com/Evergine/_build/latest?definitionId=117&branchName=master)
+[![CD RenderDoc](https://github.com/EvergineTeam/RenderDoc.NET/actions/workflows/CD.yml/badge.svg)](https://github.com/EvergineTeam/RenderDoc.NET/actions/workflows/CD.yml)
 [![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.RenderDoc?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.RenderDoc)
 
 ## Features
