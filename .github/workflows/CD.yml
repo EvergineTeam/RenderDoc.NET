@@ -26,7 +26,11 @@ jobs:
           nuget-version: "6.x"
       - name: Get version number as env variable
         id: versionNumber
-        run: echo "date=$(date +'%Y-%m-%d')" >> GITHUB_ENV
+        run: echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+      - name: Test with environment variables
+        run: echo $RELEASE_NAME
+        env:
+          RELEASE_NAME: nightly-release-${{ env.date }}
       - name: Generate Bindings
         id: build_bindings
         run: powershell ./Generate-Bindings.ps1
