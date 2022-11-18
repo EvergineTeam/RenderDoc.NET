@@ -15,7 +15,7 @@ namespace Evergine.Bindings.RenderDoc
         /// <summary>
         /// The RenderDoc <see cref="http://renderdoc.org/docs/in_application_api.html">API</see>.
         /// </summary>
-        public readonly RENDERDOC_API_1_4_1 API;
+        public readonly RENDERDOC_API_1_5_0 API;
 
         /// <summary>
         /// Attempts to load RenderDoc.
@@ -47,7 +47,7 @@ namespace Evergine.Bindings.RenderDoc
                 throw new InvalidOperationException("Failed to load RenderDoc API.");
             }
 
-            API = Marshal.PtrToStructure<RENDERDOC_API_1_4_1>((IntPtr)apiPointers);
+            API = Marshal.PtrToStructure<RENDERDOC_API_1_5_0>((IntPtr)apiPointers);
         }
 
         private static string GetRenderDocLibName()

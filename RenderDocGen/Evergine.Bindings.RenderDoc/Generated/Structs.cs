@@ -28,9 +28,10 @@ namespace Evergine.Bindings.RenderDoc
 	/// capturing without saving anything to disk.
 	/// 1.4.1 - Refactor: Renamed Shutdown to RemoveHooks to better clarify what is happening
 	/// 1.4.2 - Refactor: Renamed 'draws' to 'actions' in callstack capture option.
+	/// 1.5.0 - Added feature: ShowReplayUI() to request that the replay UI show itself if connected
 	/// </summary>
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe struct RENDERDOC_API_1_4_1
+	public unsafe struct RENDERDOC_API_1_5_0
 	{
 		public pRENDERDOC_GetAPIVersion GetAPIVersion;
 		public pRENDERDOC_SetCaptureOptionU32 SetCaptureOptionU32;
@@ -44,14 +45,12 @@ namespace Evergine.Bindings.RenderDoc
 
 		/// <summary>
 		/// Shutdown was renamed to RemoveHooks in 1.4.1.
-		/// These unions allow old code to continue compiling without changes
 		/// </summary>
 		public pRENDERDOC_RemoveHooks RemoveHooks;
 		public pRENDERDOC_UnloadCrashHandler UnloadCrashHandler;
 
 		/// <summary>
 		/// Get/SetLogFilePathTemplate was renamed to Get/SetCaptureFilePathTemplate in 1.1.2.
-		/// These unions allow old code to continue compiling without changes
 		/// </summary>
 		public pRENDERDOC_SetCaptureFilePathTemplate SetCaptureFilePathTemplate;
 		public pRENDERDOC_GetCaptureFilePathTemplate GetCaptureFilePathTemplate;
@@ -61,7 +60,6 @@ namespace Evergine.Bindings.RenderDoc
 
 		/// <summary>
 		/// IsRemoteAccessConnected was renamed to IsTargetControlConnected in 1.1.1.
-		/// This union allows old code to continue compiling without changes
 		/// </summary>
 		public pRENDERDOC_IsTargetControlConnected IsTargetControlConnected;
 		public pRENDERDOC_LaunchReplayUI LaunchReplayUI;
@@ -84,6 +82,11 @@ namespace Evergine.Bindings.RenderDoc
 		/// new function in 1.4.0
 		/// </summary>
 		public pRENDERDOC_DiscardFrameCapture DiscardFrameCapture;
+
+		/// <summary>
+		/// new function in 1.5.0
+		/// </summary>
+		public pRENDERDOC_ShowReplayUI ShowReplayUI;
 	}
 
 }

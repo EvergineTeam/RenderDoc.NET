@@ -215,6 +215,16 @@ namespace Evergine.Bindings.RenderDoc
 		 IntPtr wndHandle);
 
 	/// <summary>
+	/// Requests that the replay UI show itself (if hidden or not the current top window). This can be
+	/// used in conjunction with IsTargetControlConnected and LaunchReplayUI to intelligently handle
+	/// showing the UI after making a capture.
+	/// This will return 1 if the request was successfully passed on, though it's not guaranteed that
+	/// the UI will be on top in all cases depending on OS rules. It will return 0 if there is no current
+	/// target control connection to make such a request, or if there was another error
+	/// </summary>
+	public unsafe delegate uint pRENDERDOC_ShowReplayUI();
+
+	/// <summary>
 	/// ///////////////////////////////////////////////////////////////////////////////////////////////
 	/// RenderDoc API entry point
 	/// This entry point can be obtained via GetProcAddress/dlsym if RenderDoc is available.
