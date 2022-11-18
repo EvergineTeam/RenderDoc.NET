@@ -25,8 +25,8 @@ jobs:
         with:
           nuget-version: "6.x"
       - name: Get version number as env variable
-        id: date
-        run: echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+        id: versionNumber
+        run: echo "date=$(date +'%Y-%m-%d')" >> GITHUB_ENV
       - name: Generate Bindings
         id: build_bindings
         run: powershell ./Generate-Bindings.ps1
