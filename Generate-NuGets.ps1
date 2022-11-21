@@ -5,13 +5,13 @@
 	This script generates NuGet packages for the Mixed Reality Toolkit for Evergine
 	It's meant to have the same behavior when executed locally as when it's executed in a CI pipeline.
 .EXAMPLE
-	<script> -version 2021.11.17.1-local
+	<script> -revision 1
 .LINK
 	https://evergine.com/
 #>
 
 param (
-	[Parameter(mandatory=$true)][string]$version,
+	[Parameter(mandatory = $true)][string]$revision,
 	[string]$outputFolderBase = "nupkgs",
 	[string]$buildVerbosity = "normal",
 	[string]$buildConfiguration = "Release",
@@ -19,9 +19,12 @@ param (
 )
 
 # Utility functions
-function LogDebug($line)
-{ Write-Host "##[debug] $line" -Foreground Blue -Background Black
+function LogDebug($line) {
+ Write-Host "##[debug] $line" -Foreground Blue -Background Black
 }
+
+# calculate version
+$version = "$(Get-Date -Format "yyyy.M.d").$revision"
 
 # Show variables
 LogDebug "############## VARIABLES ##############"
@@ -36,21 +39,18 @@ $outputFolder = Join-Path $outputFolderBase $versionWithSuffix
 New-Item -ItemType Directory -Force -Path $outputFolder
 $absoluteOutputFolder = Resolve-Path $outputFolder
 
-$symbols = false
-if($buildConfiguration -eq "Debug")
-{
-	$symbols = true
+$symbols = $false
+if ($buildConfiguration -eq "Debug") {
+	$symbols = $true
 }
 
 # Generate packages
 LogDebug "START packaging process"
 & dotnet pack "$bindingsCsprojPath" -v:$buildVerbosity -p:Configuration=$buildConfiguration -p:PackageOutputPath="$absoluteOutputFolder" -p:IncludeSymbols=$symbols -p:Version=$version
-if($?)
-{
-   LogDebug "END packaging process"
+if ($?) {
+	LogDebug "END packaging process"
 }
-else
-{
+else {
 	LogDebug "ERROR; dotnet pack failed"
-   	exit -1
+	exit -1
 }

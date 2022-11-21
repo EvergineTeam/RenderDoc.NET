@@ -24,9 +24,6 @@ jobs:
       - uses: nuget/setup-nuget@v1
         with:
           nuget-version: "6.x"
-      - name: Get version number as env variable
-        id: versionNumber
-        run: echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
       - name: Test with environment variables
         run: echo $RELEASE_NAME
         env:
@@ -36,7 +33,7 @@ jobs:
         run: powershell ./Generate-Bindings.ps1
       - name: Generate NuGet packages
         id: build_nugets
-        run: powershell ./Generate-NuGets.ps1 -Version ${{  env.date  }}.${{  github.run_number  }} -outputfolder ${{  env.nugetOutputPath  }}
+        run: powershell ./Generate-NuGets.ps1 -revision ${{  github.run_number  }} -outputfolder ${{  env.nugetOutputPath  }}
       - name: Publish NuGet
         if: ${{ success() && github.event.inputs.publishEnabled == 'true' }}
         env:
