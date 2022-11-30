@@ -627,6 +627,11 @@ namespace Evergine.Bindings.RenderDoc
 		/// RENDERDOC_API_1_5_0 = 1 05 00
 		/// </summary>
 		eRENDERDOC_API_Version_1_5_0 = 10500,
+
+		/// <summary>
+		/// RENDERDOC_API_1_6_0 = 1 06 00
+		/// </summary>
+		eRENDERDOC_API_Version_1_6_0 = 10600,
 	}
 
 }

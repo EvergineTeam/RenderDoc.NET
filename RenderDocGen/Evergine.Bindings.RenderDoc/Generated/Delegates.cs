@@ -163,6 +163,16 @@ namespace Evergine.Bindings.RenderDoc
 		 int* patch);
 
 	/// <summary>
+	/// Requests that the replay UI show itself (if hidden or not the current top window). This can be
+	/// used in conjunction with IsTargetControlConnected and LaunchReplayUI to intelligently handle
+	/// showing the UI after making a capture.
+	/// This will return 1 if the request was successfully passed on, though it's not guaranteed that
+	/// the UI will be on top in all cases depending on OS rules. It will return 0 if there is no current
+	/// target control connection to make such a request, or if there was another error
+	/// </summary>
+	public unsafe delegate uint pRENDERDOC_ShowReplayUI();
+
+	/// <summary>
 	/// This sets the RenderDoc in-app overlay in the API/window pair as 'active' and it will
 	/// respond to keypresses. Neither parameter can be NULL
 	/// </summary>
@@ -216,14 +226,15 @@ namespace Evergine.Bindings.RenderDoc
 		 IntPtr wndHandle);
 
 	/// <summary>
-	/// Requests that the replay UI show itself (if hidden or not the current top window). This can be
-	/// used in conjunction with IsTargetControlConnected and LaunchReplayUI to intelligently handle
-	/// showing the UI after making a capture.
-	/// This will return 1 if the request was successfully passed on, though it's not guaranteed that
-	/// the UI will be on top in all cases depending on OS rules. It will return 0 if there is no current
-	/// target control connection to make such a request, or if there was another error
+	/// Only valid to be called between a call to StartFrameCapture and EndFrameCapture. Gives a custom
+	/// title to the capture produced which will be displayed in the UI.
+	/// If multiple captures are ongoing, this title will be applied to the first capture to end after
+	/// this call. The second capture to end will have no title, unless this function is called again.
+	/// Calling this function has no effect if no capture is currently running, and if it is called
+	/// multiple times only the last title will be used.
 	/// </summary>
-	public unsafe delegate uint pRENDERDOC_ShowReplayUI();
+	public unsafe delegate void pRENDERDOC_SetCaptureTitle(
+		 [MarshalAs(UnmanagedType.LPStr)] string title);
 
 	/// <summary>
 	/// ///////////////////////////////////////////////////////////////////////////////////////////////
