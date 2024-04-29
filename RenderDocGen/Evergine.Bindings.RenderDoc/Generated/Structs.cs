@@ -64,7 +64,6 @@ namespace Evergine.Bindings.RenderDoc
 
 		/// <summary>
 		/// IsRemoteAccessConnected was renamed to IsTargetControlConnected in 1.1.1.
-		/// This union allows old code to continue compiling without changes
 		/// </summary>
 		public pRENDERDOC_IsTargetControlConnected IsTargetControlConnected;
 		public pRENDERDOC_LaunchReplayUI LaunchReplayUI;
