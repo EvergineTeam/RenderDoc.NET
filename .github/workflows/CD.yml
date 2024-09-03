@@ -1,4 +1,4 @@
-name: CD RenderDoc
+name: CD
 on:
   workflow_dispatch:
     inputs:
