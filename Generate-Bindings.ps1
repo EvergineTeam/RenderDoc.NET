@@ -42,7 +42,7 @@ else
 
 # Run generator
 LogDebug "START binding generator process"
-pushd .\RenderDocGen\RenderDocGen\bin\Release\net6.0\
+pushd .\RenderDocGen\RenderDocGen\bin\Release\net8.0\
 .\publish\RenderDocGen.exe
 if($?)
 {
