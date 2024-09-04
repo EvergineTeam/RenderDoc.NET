@@ -2,8 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-	  <PackageIcon>icon.png</PackageIcon>
+	  <Copyright>Copyright (c) Evergine 2024</Copyright>
+	  <Authors>Evergine Team</Authors>
+	  <Company>Plain Concepts</Company>
+	  <Description>Low-level bindings for RenderDoc used in Evergine</Description>
 	  <RepositoryUrl>https://github.com/EvergineTeam/RenderDoc.NET</RepositoryUrl>
+	  <PackageIcon>icon.png</PackageIcon>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -15,10 +20,8 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\..\icon.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
+		<None Include="..\..\icon.png" Pack="true" PackagePath="\" Visible="false" />
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" Visible="false" />
 	</ItemGroup>
 	
 </Project>
