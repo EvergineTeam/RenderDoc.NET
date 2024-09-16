@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
 using System.IO;
-using System.Net;
 
 namespace Evergine.Bindings.RenderDoc
 {
@@ -24,22 +21,22 @@ namespace Evergine.Bindings.RenderDoc
         /// <returns>Whether RenderDoc was successfully loaded.</returns>
         public static bool Load(out RenderDoc renderDoc)
         {
-            try
+            var libName = GetRenderDocLibName();
+            if (NativeLibrary.TryLoad(libName, out var lib) || 
+                NativeLibrary.TryLoad(libName, typeof(RenderDoc).Assembly, null, out lib))
             {
-                var nativeLib = NativeLibrary.Load(GetRenderDocLibName());
-                renderDoc = new RenderDoc(nativeLib);
+                renderDoc = new RenderDoc(lib);
                 return true;
             }
-            catch
-            {
-                renderDoc = null;
-                return false;
-            }
+
+            renderDoc = null;
+            return false;
         }
 
-        private unsafe RenderDoc(NativeLibrary nativeLib)
+        private unsafe RenderDoc(IntPtr nativeLib)
         {
-            nativeLib.LoadFunction("RENDERDOC_GetAPI", out pRENDERDOC_GetAPI getApiDelegate);
+            NativeLibrary.TryGetExport(nativeLib, "RENDERDOC_GetAPI", out IntPtr funcPtr);
+            var getApiDelegate = Marshal.GetDelegateForFunctionPointer<pRENDERDOC_GetAPI>(funcPtr);
             void* apiPointers;
             int result = getApiDelegate(RENDERDOC_Version.eRENDERDOC_API_Version_1_4_1, &apiPointers);
             if (result != 1)
