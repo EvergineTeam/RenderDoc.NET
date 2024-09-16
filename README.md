@@ -13,10 +13,38 @@ Official documentation: https://renderdoc.org/docs/in_application_api.html
 - RenderDoc 1.4.1
 - Raw low level binding using unsafe c# code
 
+## Installation
+### Visual Studio
+#### NuGet Package Manager
+Create a C# project and open the NuGet package manager, select the Browse tab, search for Evergine.Bindings.RenderDoc and install the package.
+#### Or via the Package Manager Console
+```
+dotnet add package Evergine.Bindings.RenderDoc
+```
+
+## Usage
+- Make sure [RenderDoc](https://renderdoc.org/) is installed on your system. 
+- Include the `Evergine.Bindings.RenderDoc` namespace in your code:
+    ```csharp
+    using Evergine.Bindings.RenderDoc;
+    ```
+- Load RenderDoc into your C# application before any rendering code happen, as early as possible:
+    ```csharp
+    RenderDoc.Load(out RenderDoc renderDoc);
+    ```
+- If you have a window based application you will get a RenderDoc overlay on the top left corner of your window. You can take a RenderDoc screenshot by pressing F12 or PrtScrn.
+![alt Capture0](RenderDocOverlay.png)
+- Or if you do not have a window based application you can capture a frame by calling:
+    ```csharp
+    renderDoc.API.StartFrameCapture(IntPtr device, IntPtr wndHandle);
+    ... graphics code ...
+    renderDoc.API.EndFrameCapture(IntPtr device, IntPtr wndHandle);
+    ```
+- A RenderDoc capture file will be created in the default directory: `C:\Users\{user}\AppData\Local\Temp\RenderDoc`. You can double click that file and it will open in RenderDoc.
 ## Test Images
 
-![alt Capture1](https://github.com/EvergineTeam/RenderDoc.NET/blob/master/Capture1.JPG)
-![alt Capture0](https://github.com/EvergineTeam/RenderDoc.NET/blob/master/Capture.JPG)
+![alt Capture1](Capture1.JPG)
+![alt Capture0](Capture.JPG)
 
 ## Related Work
 
