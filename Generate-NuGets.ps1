@@ -1,8 +1,8 @@
 <#
 .SYNOPSIS
-	Evergine NuGet Packages generator script, (c) 2022 Evergine Team
+	Evergine NuGet Packages generator script, (c) 2025 Evergine Team
 .DESCRIPTION
-	This script generates NuGet packages for the Mixed Reality Toolkit for Evergine
+	This script generates NuGet packages for the RenderDoc for Evergine
 	It's meant to have the same behavior when executed locally as when it's executed in a CI pipeline.
 .EXAMPLE
 	<script> -revision 1

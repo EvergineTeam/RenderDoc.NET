@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-	Evergine bindings generator script, (c) 2022 Evergine Team
+	Evergine bindings generator script, (c) 2025 Evergine Team
 .DESCRIPTION
 	This script generates RenderDoc bindings used in Evergine
 	It's meant to have the same behavior when executed locally as when it's executed in a CI pipeline.
