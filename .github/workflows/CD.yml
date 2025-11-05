@@ -30,6 +30,7 @@ jobs:
       revision: ${{ github.run_number }}           # Revision for date-based version (bindings style). Use with bindings.
       publish-enabled: ${{ !inputs.skip-assets-publishing }} # Publish NuGets to Nuget.org
       enable-email-notifications: true             # Enable email notifications on failure
+      runner-os: windows-latest                  # OS for the runner (windows-latest, ubuntu-latest, etc.)
     secrets:
       NUGET_UPLOAD_TOKEN: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
       WAVE_SENDGRID_TOKEN: ${{ secrets.WAVE_SENDGRID_TOKEN }}
