@@ -31,7 +31,9 @@ namespace RenderDocGen
             }
             else
             {
-                string outputPath = "..\\..\\..\\..\\..\\Evergine.Bindings.RenderDoc\\Generated";
+                string outputPath = Path.Combine(
+                    "..", "..", "..", "..", "..",
+                    "Evergine.Bindings.RenderDoc", "Generated");
                 CsCodeGenerator.Instance.Generate(compilation, outputPath);
             }
         }

@@ -7,11 +7,17 @@ name: CD
 
 on:
   workflow_dispatch:
+    inputs:
+      skip-assets-publishing:
+        description: 'Skip assets publishing'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   cd:
     if: github.event_name != 'schedule' || github.ref == 'refs/heads/master'
-    uses: EvergineTeam/evergine-standards/.github/workflows/binding-simple-cd.yml@main
+    uses: EvergineTeam/evergine-standards/.github/workflows/binding-simple-cd.yml@v2
     with:
       generator-project: "RenderDocGen/RenderDocGen/RenderDocGen.csproj"  # Path to your generator .csproj
       generator-name: "RenderDoc"                # Name of your generator executable
@@ -22,7 +28,7 @@ jobs:
       runtime-identifier: "win-x64"                # Runtime identifier (win-x64, linux-x64, etc.)
       build-configuration: "Release"               # Build configuration (Release, Debug, etc.)
       revision: ${{ github.run_number }}           # Revision for date-based version (bindings style). Use with bindings.
-      publish-enabled: true                        # Publish NuGets to Nuget.org
+      publish-enabled: ${{ !inputs.skip-assets-publishing }} # Publish NuGets to Nuget.org
       enable-email-notifications: true             # Enable email notifications on failure
     secrets:
       NUGET_UPLOAD_TOKEN: ${{ secrets.EVERGINE_NUGETORG_TOKEN }}
