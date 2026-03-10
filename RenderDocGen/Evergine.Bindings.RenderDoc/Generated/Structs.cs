@@ -119,10 +119,6 @@ namespace Evergine.Bindings.RenderDoc
 		/// These unions allow old code to continue compiling without changes
 		/// </summary>
 		public pRENDERDOC_SetCaptureFilePathTemplate SetCaptureFilePathTemplate;
-
-		/// <summary>
-		/// current name
-		/// </summary>
 		public pRENDERDOC_GetCaptureFilePathTemplate GetCaptureFilePathTemplate;
 		public pRENDERDOC_GetNumCaptures GetNumCaptures;
 		public pRENDERDOC_GetCapture GetCapture;
