@@ -12,6 +12,28 @@ namespace RenderDocGen
     {
         public static List<string> TypedefList;
 
+        private static readonly HashSet<string> s_csReservedKeywords = new HashSet<string>
+        {
+            "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char",
+            "checked", "class", "const", "continue", "decimal", "default", "delegate", "do",
+            "double", "else", "enum", "event", "explicit", "extern", "false", "finally",
+            "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int",
+            "interface", "internal", "is", "lock", "long", "namespace", "new", "null",
+            "object", "operator", "out", "override", "params", "private", "protected",
+            "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof",
+            "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true",
+            "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using",
+            "virtual", "void", "volatile", "while",
+        };
+
+        public static string EscapeReservedKeyword(string name)
+        {
+            if (s_csReservedKeywords.Contains(name))
+                return "@" + name;
+
+            return name;
+        }
+
         private static readonly Dictionary<string, string> s_csNameMappings = new Dictionary<string, string>()
         {
             { "uint8_t", "byte" },
@@ -80,13 +102,28 @@ namespace RenderDocGen
             return string.Empty;
         }
 
+        public static bool IsFixedArray(CppType type, out string elementType, out int arraySize)
+        {
+            if (type is CppArrayType arrayType && arrayType.Size > 0)
+            {
+                elementType = ConvertToCSharpType(arrayType.ElementType);
+                elementType = ShowAsMarshalType(elementType, Family.field);
+                arraySize = arrayType.Size;
+                return true;
+            }
+
+            elementType = null;
+            arraySize = 0;
+            return false;
+        }
+
         public static object GetParametersSignature(CppFunction command, bool useTypes = true)
         {
             StringBuilder signature = new StringBuilder();
             foreach (var parameter in command.Parameters)
             {
                 string convertedType = ConvertToCSharpType(parameter.Type);
-                string convertedName = parameter.Name;
+                string convertedName = EscapeReservedKeyword(parameter.Name);
 
                 if (useTypes)
                     signature.Append($"{convertedType} ");

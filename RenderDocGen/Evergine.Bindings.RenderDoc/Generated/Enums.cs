@@ -561,12 +561,30 @@ namespace Evergine.Bindings.RenderDoc
 		/// <summary>
 		/// Enable all bits
 		/// </summary>
-		eRENDERDOC_Overlay_All = -1,
+		eRENDERDOC_Overlay_All = 134217727,
 
 		/// <summary>
 		/// Disable all bits
 		/// </summary>
 		eRENDERDOC_Overlay_None = 0,
+	}
+
+	/// <summary>
+	/// the type of an annotation value, or Empty to delete an annotation
+	/// </summary>
+	public enum RENDERDOC_AnnotationType
+	{
+		eRENDERDOC_Empty = 0,
+		eRENDERDOC_Bool = 1,
+		eRENDERDOC_Int32 = 2,
+		eRENDERDOC_UInt32 = 3,
+		eRENDERDOC_Int64 = 4,
+		eRENDERDOC_UInt64 = 5,
+		eRENDERDOC_Float = 6,
+		eRENDERDOC_Double = 7,
+		eRENDERDOC_String = 8,
+		eRENDERDOC_APIObject = 9,
+		eRENDERDOC_AnnotationMax = 2147483647,
 	}
 
 	/// <summary>
@@ -645,6 +663,11 @@ namespace Evergine.Bindings.RenderDoc
 		/// RENDERDOC_API_1_6_0 = 1 06 00
 		/// </summary>
 		eRENDERDOC_API_Version_1_6_0 = 10600,
+
+		/// <summary>
+		/// RENDERDOC_API_1_7_0 = 1 07 00
+		/// </summary>
+		eRENDERDOC_API_Version_1_7_0 = 10700,
 	}
 
 }

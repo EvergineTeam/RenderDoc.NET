@@ -102,7 +102,7 @@ namespace RenderDocGen
                             var parameter = pointerType.Parameters[i];
                             var convertedType = Helpers.ConvertToCSharpType(parameter.Type);
                             convertedType = Helpers.ShowAsMarshalType(convertedType, Helpers.Family.param);
-                            file.Write($"\t\t {convertedType} {parameter.Name}");
+                            file.Write($"\t\t {convertedType} {Helpers.EscapeReservedKeyword(parameter.Name)}");
                         }
                     }
 
@@ -124,20 +124,59 @@ namespace RenderDocGen
                 file.WriteLine("namespace Evergine.Bindings.RenderDoc");
                 file.WriteLine("{");
 
-                var structs = compilation.Classes.Where(c => c.ClassKind == CppClassKind.Struct && c.IsDefinition == true);
+                var structs = compilation.Classes.Where(c =>
+                    (c.ClassKind == CppClassKind.Struct || c.ClassKind == CppClassKind.Union)
+                    && c.IsDefinition == true);
 
                 foreach (var structure in structs)
                 {
+                    bool isUnion = structure.ClassKind == CppClassKind.Union;
+
                     Helpers.PrintComments(file, structure.Comment, "\t");
-                    file.WriteLine("\t[StructLayout(LayoutKind.Sequential)]");
+                    file.WriteLine($"\t[StructLayout(LayoutKind.{(isUnion ? "Explicit" : "Sequential")})]");
                     file.WriteLine($"\tpublic unsafe struct {structure.Name}");
                     file.WriteLine("\t{");
+
                     foreach (var member in structure.Fields)
                     {
+                        // Handle anonymous unions inside structs by flattening them.
+                        // Take the last field which is typically the current/non-deprecated name.
+                        if (member.Type is CppClass anonymousUnion
+                            && anonymousUnion.ClassKind == CppClassKind.Union
+                            && string.IsNullOrEmpty(anonymousUnion.Name))
+                        {
+                            if (anonymousUnion.Fields.Count > 0)
+                            {
+                                var selectedField = anonymousUnion.Fields[anonymousUnion.Fields.Count - 1];
+                                Helpers.PrintComments(file, member.Comment, "\t\t", true);
+                                string type = Helpers.ConvertToCSharpType(selectedField.Type);
+                                type = Helpers.ShowAsMarshalType(type, Helpers.Family.field);
+                                string fieldName = Helpers.EscapeReservedKeyword(selectedField.Name);
+                                file.WriteLine($"\t\tpublic {type} {fieldName};");
+                            }
+                            continue;
+                        }
+
                         Helpers.PrintComments(file, member.Comment, "\t\t", true);
-                        string type = Helpers.ConvertToCSharpType(member.Type);
-                        type = Helpers.ShowAsMarshalType(type, Helpers.Family.field);
-                        file.WriteLine($"\t\tpublic {type} {member.Name};");
+                        string escapedName = Helpers.EscapeReservedKeyword(member.Name);
+
+                        if (Helpers.IsFixedArray(member.Type, out string elementType, out int arraySize))
+                        {
+                            if (isUnion)
+                                file.WriteLine($"\t\t[FieldOffset(0)] public fixed {elementType} {escapedName}[{arraySize}];");
+                            else
+                                file.WriteLine($"\t\tpublic fixed {elementType} {escapedName}[{arraySize}];");
+                        }
+                        else
+                        {
+                            string type = Helpers.ConvertToCSharpType(member.Type);
+                            type = Helpers.ShowAsMarshalType(type, Helpers.Family.field);
+
+                            if (isUnion)
+                                file.WriteLine($"\t\t[FieldOffset(0)] public {type} {escapedName};");
+                            else
+                                file.WriteLine($"\t\tpublic {type} {escapedName};");
+                        }
                     }
 
                     file.WriteLine("\t}\n");

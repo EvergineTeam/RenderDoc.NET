@@ -237,6 +237,34 @@ namespace Evergine.Bindings.RenderDoc
 		 [MarshalAs(UnmanagedType.LPStr)] string title);
 
 	/// <summary>
+	/// The device is specified in the same way as other API calls that take a RENDERDOC_DevicePointer
+	/// to specify the device.
+	/// The object or queue/commandbuffer will depend on the graphics API in question.
+	/// Return value:
+	/// 0 - The annotation was applied successfully.
+	/// 1 - The device is unknown/invalid
+	/// 2 - The device is valid but the annotation is not supported for API-specific reasons, such as an
+	/// unrecognised or invalid object or queue/commandbuffer
+	/// 3 - The call is ill-formed or invalid e.g. empty is specified with a value pointer, or non-empty
+	/// is specified with a NULL value pointer
+	/// </summary>
+	public unsafe delegate uint pRENDERDOC_SetObjectAnnotation(
+		 IntPtr device,
+		 void* @object,
+		 [MarshalAs(UnmanagedType.LPStr)] string key,
+		 RENDERDOC_AnnotationType valueType,
+		 uint valueVectorWidth,
+		 RENDERDOC_AnnotationValue* value);
+
+	public unsafe delegate uint pRENDERDOC_SetCommandAnnotation(
+		 IntPtr device,
+		 void* queueOrCommandBuffer,
+		 [MarshalAs(UnmanagedType.LPStr)] string key,
+		 RENDERDOC_AnnotationType valueType,
+		 uint valueVectorWidth,
+		 RENDERDOC_AnnotationValue* value);
+
+	/// <summary>
 	/// ///////////////////////////////////////////////////////////////////////////////////////////////
 	/// RenderDoc API entry point
 	/// This entry point can be obtained via GetProcAddress/dlsym if RenderDoc is available.

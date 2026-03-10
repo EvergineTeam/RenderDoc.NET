@@ -4,6 +4,66 @@ using System.Runtime.InteropServices;
 namespace Evergine.Bindings.RenderDoc
 {
 	/// <summary>
+	/// a union with vector annotation value data
+	/// </summary>
+	[StructLayout(LayoutKind.Explicit)]
+	public unsafe struct RENDERDOC_AnnotationVectorValue
+	{
+		[FieldOffset(0)] public fixed byte boolean[4];
+		[FieldOffset(0)] public fixed int int32[4];
+		[FieldOffset(0)] public fixed long int64[4];
+		[FieldOffset(0)] public fixed uint uint32[4];
+		[FieldOffset(0)] public fixed ulong uint64[4];
+		[FieldOffset(0)] public fixed float float32[4];
+		[FieldOffset(0)] public fixed double float64[4];
+	}
+
+	/// <summary>
+	/// a union with scalar annotation value data
+	/// </summary>
+	[StructLayout(LayoutKind.Explicit)]
+	public unsafe struct RENDERDOC_AnnotationValue
+	{
+		[FieldOffset(0)] public byte boolean;
+		[FieldOffset(0)] public int int32;
+		[FieldOffset(0)] public long int64;
+		[FieldOffset(0)] public uint uint32;
+		[FieldOffset(0)] public ulong uint64;
+		[FieldOffset(0)] public float float32;
+		[FieldOffset(0)] public double float64;
+		[FieldOffset(0)] public RENDERDOC_AnnotationVectorValue vector;
+		[FieldOffset(0)] public byte* @string;
+		[FieldOffset(0)] public void* apiObject;
+	}
+
+	/// <summary>
+	/// a struct for specifying a GL object, as we don't have pointers we can use so instead we specify a
+	/// pointer to this struct giving both the type and the name
+	/// </summary>
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct RENDERDOC_GLResourceReference
+	{
+
+		/// <summary>
+		/// this is the same GLenum identifier as passed to glObjectLabel
+		/// </summary>
+		public uint identifier;
+		public uint name;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct RDGLObjectHelper
+	{
+		public RENDERDOC_GLResourceReference gl;
+	}
+
+	[StructLayout(LayoutKind.Sequential)]
+	public unsafe struct RDAnnotationHelper
+	{
+		public RENDERDOC_AnnotationValue val;
+	}
+
+	/// <summary>
 	/// API version changelog:
 	/// 1.0.0 - initial release
 	/// 1.0.1 - Bugfix: IsFrameCapturing() was returning false for captures that were triggered
@@ -31,9 +91,11 @@ namespace Evergine.Bindings.RenderDoc
 	/// 1.5.0 - Added feature: ShowReplayUI() to request that the replay UI show itself if connected
 	/// 1.6.0 - Added feature: SetCaptureTitle() which can be used to set a title for a
 	/// capture made with StartFrameCapture() or EndFrameCapture()
+	/// 1.7.0 - Added feature: SetObjectAnnotation() / SetCommandAnnotation() for adding rich
+	/// annotations to objects and command streams
 	/// </summary>
 	[StructLayout(LayoutKind.Sequential)]
-	public unsafe struct RENDERDOC_API_1_6_0
+	public unsafe struct RENDERDOC_API_1_7_0
 	{
 		public pRENDERDOC_GetAPIVersion GetAPIVersion;
 		public pRENDERDOC_SetCaptureOptionU32 SetCaptureOptionU32;
@@ -57,6 +119,10 @@ namespace Evergine.Bindings.RenderDoc
 		/// These unions allow old code to continue compiling without changes
 		/// </summary>
 		public pRENDERDOC_SetCaptureFilePathTemplate SetCaptureFilePathTemplate;
+
+		/// <summary>
+		/// current name
+		/// </summary>
 		public pRENDERDOC_GetCaptureFilePathTemplate GetCaptureFilePathTemplate;
 		public pRENDERDOC_GetNumCaptures GetNumCaptures;
 		public pRENDERDOC_GetCapture GetCapture;
@@ -64,6 +130,7 @@ namespace Evergine.Bindings.RenderDoc
 
 		/// <summary>
 		/// IsRemoteAccessConnected was renamed to IsTargetControlConnected in 1.1.1.
+		/// This union allows old code to continue compiling without changes
 		/// </summary>
 		public pRENDERDOC_IsTargetControlConnected IsTargetControlConnected;
 		public pRENDERDOC_LaunchReplayUI LaunchReplayUI;
@@ -96,6 +163,12 @@ namespace Evergine.Bindings.RenderDoc
 		/// new function in 1.6.0
 		/// </summary>
 		public pRENDERDOC_SetCaptureTitle SetCaptureTitle;
+
+		/// <summary>
+		/// new functions in 1.7.0
+		/// </summary>
+		public pRENDERDOC_SetObjectAnnotation SetObjectAnnotation;
+		public pRENDERDOC_SetCommandAnnotation SetCommandAnnotation;
 	}
 
 }
