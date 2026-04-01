@@ -25,7 +25,7 @@ jobs:
       generator-project: "RenderDocGen/RenderDocGen/RenderDocGen.csproj"  # Path to your generator .csproj
       generator-name: "RenderDoc"                # Name of your generator executable
       binding-project: "RenderDocGen/Evergine.Bindings.RenderDoc/Evergine.Bindings.RenderDoc.csproj" # Path to your binding .csproj
-      target-framework: "net8.0"                   # Target framework for generator/binding
+      target-framework: "net10.0"                   # Target framework for generator/binding
       runtime-identifier: "win-x64"                # Runtime identifier (win-x64, linux-x64, etc.)
       build-configuration: "Release"               # Build configuration (Release, Debug, etc.)
       nuget-artifacts: ${{ inputs.publish-artifacts || false }} # Upload NuGets as workflow artifacts
