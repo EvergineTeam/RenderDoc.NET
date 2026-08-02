@@ -1,0 +1,30 @@
+# Binding manifest — see https://github.com/EvergineTeam/Evergine.Bindings
+# Schema: https://github.com/EvergineTeam/Evergine.Bindings/blob/main/binding.schema.json
+toolbox: 1.0.0
+
+package:
+  id: Evergine.Bindings.RenderDoc
+  project: RenderDocGen/Evergine.Bindings.RenderDoc/Evergine.Bindings.RenderDoc.csproj
+  target-framework: net10.0
+  runtime-identifier: win-x64
+
+upstream:
+  kind: git-tree
+  language: cpp
+  project: https://github.com/baldurk/renderdoc
+  version-from: git-release
+  sources:
+    # `v1.x` is RenderDoc's long-lived release branch, not a tag. The API header is an
+    # in-application interface that only grows additively, so tracking the branch is
+    # safe here in a way it would not be for a struct-layout header.
+    - repo: baldurk/renderdoc
+      ref: v1.x
+      remote-path: renderdoc/api/app/renderdoc_app.h
+      path: RenderDocGen/RenderDocGen/Headers/renderdoc_app.h
+      format: c-header
+
+generator:
+  project: RenderDocGen/RenderDocGen/RenderDocGen.csproj
+  name: RenderDoc
+  output:
+    - RenderDocGen/Evergine.Bindings.RenderDoc/Generated
