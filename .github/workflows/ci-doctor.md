@@ -27,9 +27,16 @@ tools:
     mode: gh-proxy
     toolsets: [default]
 safe-outputs:
+  # The doctor's whole job is editing workflow configuration, and GITHUB_TOKEN
+  # may not write under .github/workflows/ -- that permission is App-only. Without
+  # this the pull request fails and degrades to an issue carrying a manual link.
+  github-app:
+    client-id: ${{ vars.APP_CLIENT_ID }}
+    private-key: ${{ secrets.APP_PRIVATE_KEY }}
   create-pull-request:
     title-prefix: "fix(ci): "
     labels: [agent:ci-fix]
+    allow-workflows: true
     allowed-files:
       - ".github/workflows/**"
     draft: false
@@ -40,7 +47,7 @@ safe-outputs:
     allowed-labels: [agent:needs-regen, agent:upstream-break, agent:needs-human]
     deduplicate-by-title: true
     max: 1
-source: EvergineTeam/Evergine.Bindings@caf2c567e1107d9590a03229906e331fad46db4c
+source: EvergineTeam/Evergine.Bindings@19dd071f1863ac632c22c023bbcc45008c49dc1e
 ---
 
 # CI Doctor
