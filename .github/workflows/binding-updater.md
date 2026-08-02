@@ -66,7 +66,7 @@ safe-outputs:
     allowed-labels: [agent:needs-human, agent:upstream-break]
     deduplicate-by-title: true
     max: 1
-source: EvergineTeam/Evergine.Bindings@caf2c567e1107d9590a03229906e331fad46db4c
+source: EvergineTeam/Evergine.Bindings@19dd071f1863ac632c22c023bbcc45008c49dc1e
 ---
 
 # Binding Updater
