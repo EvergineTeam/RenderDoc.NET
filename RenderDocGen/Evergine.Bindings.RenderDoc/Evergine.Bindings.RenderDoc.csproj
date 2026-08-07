@@ -8,6 +8,7 @@
 	  <Description>Low-level bindings for RenderDoc used in Evergine</Description>
 	  <RepositoryUrl>https://github.com/EvergineTeam/RenderDoc.NET</RepositoryUrl>
 	  <PackageIcon>icon.png</PackageIcon>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
