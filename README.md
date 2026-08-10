@@ -45,7 +45,3 @@ dotnet add package Evergine.Bindings.RenderDoc
 
 ![alt Capture1](Capture1.JPG)
 ![alt Capture0](Capture.JPG)
-
-## Related Work
-
-- [Veldrid RenderDoc Binding](https://github.com/mellinoe/veldrid/tree/c44982e59b0a77a3e01ece926e9993dc72986b0d/src/Veldrid.RenderDoc)
