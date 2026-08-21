@@ -22,18 +22,44 @@ namespace Evergine.Bindings.RenderDoc
         public static bool Load(out RenderDoc renderDoc)
         {
             var libName = GetRenderDocLibName();
-            if (NativeLibrary.TryLoad(libName, out var lib) || 
-                NativeLibrary.TryLoad(libName, typeof(RenderDoc).Assembly, null, out lib))
+            return Load(libName, out renderDoc);
+        }
+
+        /// <summary>
+        /// Attempts to load RenderDoc.
+        /// </summary>
+        /// <param name="libraryName">library .dll or .so name</param>
+        /// <param name="renderDoc">The RenderDoc instance.</param>
+        /// <returns>Whether RenderDoc was successfully loaded.</returns>
+        public static bool Load(string libraryName, out RenderDoc renderDoc)
+        {
+            if (NativeLibrary.TryLoad(libraryName, out var lib) ||
+                NativeLibrary.TryLoad(libraryName, typeof(RenderDoc).Assembly, null, out lib))
             {
-                renderDoc = new RenderDoc(lib);
-                return true;
+                return Load(lib, out renderDoc);
             }
 
             renderDoc = null;
             return false;
         }
 
-        private unsafe RenderDoc(IntPtr nativeLib)
+        /// <summary>
+        /// Attempts to load RenderDoc.
+        /// </summary>
+        /// <param name="nativeLib">native handle to loaded native renderdoc library</param>
+        /// <param name="renderDoc">The RenderDoc instance.</param>
+        /// <returns>Whether RenderDoc was successfully loaded.</returns>
+        public static bool Load(nint nativeLib, out RenderDoc renderDoc)
+        {
+            renderDoc = null;
+            if (nativeLib != 0)
+            {
+                renderDoc = new RenderDoc(nativeLib);
+            }
+            return renderDoc != null;
+        }
+
+        private RenderDoc(nint nativeLib)
         {
             NativeLibrary.TryGetExport(nativeLib, "RENDERDOC_GetAPI", out IntPtr funcPtr);
             var getApiDelegate = Marshal.GetDelegateForFunctionPointer<pRENDERDOC_GetAPI>(funcPtr);
